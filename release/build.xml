@@ -45,7 +45,7 @@
 	<property name="restcomm-diam.resources.version" value="2.8.0-SNAPSHOT" />
 
 	<!-- SMPP extentions and and RAs -->
-	<property name="restcomm-smpp-extensions.build-number" value="13" />
+	<property name="restcomm-smpp-extensions.build-number" value="15" />
 	<property name="restcomm-smpp-extensions.version" value="1.0" />
 	<property name="restcomm-smpp-ra.build-number" value="24" />
 	<property name="restcomm-smpp-ra.version" value="7.0" />
@@ -204,6 +204,7 @@
 
 	
 	<available file="${restcomm-slee.distro.zip.path}" property="got.restcomm-slee" />
+	<echo>got-restcomm-slee=${got.restcomm-slee}</echo>
 	<target name="get-restcomm-slee" unless="got.restcomm-slee">
 		<echo>Downloading RestComm Slee version: ${restcomm-slee.version}</echo>
 		<exec failonerror="true" executable="wget">
@@ -227,6 +228,7 @@
 	</target>
 
 	<available file="${restcomm-jss7.distro.zip.path}" property="got.restcomm-jss7" />
+	<echo>got-restcomm-jss7=${got-restcomm-jss7}</echo>
 	<target name="get-restcomm-jss7" unless="got.restcomm-jss7">
 		<echo>Downloading RestComm JSS7 version: ${restcomm-jss7.version}</echo>
 		<exec failonerror="true" executable="wget">
@@ -273,6 +275,7 @@
 	</target>
 
 	<available file="${restcomm-slee-sip11.distro.zip.path}" property="got-restcomm-sip-ra" />
+	<echo>got-restcomm-sip-ra=${got-restcomm-sip-ra}</echo>
 	<target name="get-restcomm-sip-ra" unless="got-restcomm-sip-ra">
 		<echo>Downloading RestComm SIP RA version: ${restcomm-slee-sip11.tag}</echo>
 		<exec failonerror="true" executable="wget">
@@ -299,6 +302,7 @@
 
 
 	<available file="${restcomm-diam.distro.zip.path}" property="got.restcomm-diam" />
+	<echo>got.restcomm-diam=${got.restcomm-diam}</echo>
 	<target name="get-restcomm-diam" unless="got.restcomm-diam">
 		<echo>Downloading RestComm Diameter version: ${restcomm-diam.version}</echo>
 		<exec failonerror="true" executable="wget">
@@ -315,6 +319,7 @@
 
 
 	<available file="${restcomm-smpp-extensions.distro.zip.path}" property="got.restcomm-smpp-extensions" />
+	<echo>got.restcomm-smpp-extensions=${got.restcomm-smpp-extensions}</echo>
 	<target name="get-restcomm-smpp-extensions" unless="got.restcomm-smpp-extensions">
 		<echo>Downloading RestComm SMPP Extenaions: ${restcomm-smpp-extensions.version}</echo>
 		<exec failonerror="true" executable="wget">
@@ -329,7 +334,8 @@
 		<unzip src="${restcomm-smpp-extensions.distro.zip.path}" dest="${checkout.restcomm-smpp-extensions.dir}"/>
 	</target>
 
-	<available file="${restcomm-smpp-ra.distro.zip.path}" property="got.restcomm-smpp-ra" />
+	<available file="${restcomm-smpp-ra.distro.jar.path}" property="got.restcomm-smpp-ra" />
+	<echo>got.restcomm-smpp-ra=${got.restcomm-smpp-ra}</echo>
 	<target name="get-restcomm-smpp-ra" unless="got.restcomm-smpp-ra">
 		<echo>Downloading RestComm SMPP RA: ${restcomm-smpp-ra.version}</echo>
 		<exec failonerror="true" executable="wget">
@@ -341,6 +347,7 @@
 
 	<!-- Cassandra  -->
 	<available file="${community-cassandra.distro.zip.path}" property="got.community-cassandra" />
+	<echo>got.community-cassandra=${got.community-cassandra}</echo>
 	<target name="get-community-cassandra" unless="got.community-cassandra">
 		<echo>Downloading Community Cassandra only version: ${community-cassandra.version}</echo>
 		<exec failonerror="true" executable="wget">
@@ -521,8 +528,8 @@
 			</fileset>
 		</copy>
 		<copy file="${checkout.restcomm-smsc.dir}/core/slee/resource-adaptors/du/target/smsc-resource-adaptors-du-${restcomm.smsc.release.version}.jar" todir="${release.dir}/jboss-5.1.0.GA/server/default/deploy" failonerror="true" />
-		<copy file="${checkout.telscale-smsc.dir}/core/slee/resource-adaptors/mproc-ra/du-ratype/target/mproc-ratype-du-${telscale.smsc.release.version}.jar" todir="${release.dir}/jboss-5.1.0.GA/server/default/deploy" failonerror="true" />
-		<copy file="${checkout.restcomm-smsc.dir}/core/slee/resource-adaptors/mproc-ra/du/target/mproc-ra-du-${restcomm.smsc.release.version}.jar" todir="${release.dir}/jboss-5.1.0.GA/server/default/deploy" failonerror="true" />
+		<copy file="${checkout.restcomm-smsc.dir}/core/slee/resource-adaptors/mproc-ra/du-ratype/target/mproc-ratype-du-${restcomm.smsc.release.version}.jar" todir="${release.dir}/jboss-5.1.0.GA/server/default/deploy" failonerror="true" />
+		<copy file="${checkout.restcomm-smsc.dir}/core/slee/resource-adaptors/mproc-ra/du-ra/target/mproc-ra-du-${restcomm.smsc.release.version}.jar" todir="${release.dir}/jboss-5.1.0.GA/server/default/deploy" failonerror="true" />
 		<copy file="${checkout.restcomm-smsc.dir}/core/slee/services/du/target/smsc-services-du-${restcomm.smsc.release.version}.jar" todir="${release.dir}/jboss-5.1.0.GA/server/default/deploy" failonerror="true" />
 		<copy file="${checkout.dir}/${restcomm-map-ra.download.jar.file}" todir="${release.dir}/jboss-5.1.0.GA/server/default/deploy" failonerror="true" />
 		<copy file="${checkout.restcomm-smsc.dir}/management/ui-management/target/smsc-management.war" todir="${release.dir}/jboss-5.1.0.GA/server/default/deploy" failonerror="true" />
@@ -538,8 +545,8 @@
 			</fileset>
 		</copy>
 		<copy file="${checkout.restcomm-smsc.dir}/core/slee/resource-adaptors/du/target/smsc-resource-adaptors-du-${restcomm.smsc.release.version}.jar" todir="${release.dir}/jboss-5.1.0.GA/server/simulator/deploy" failonerror="true" />
-		<copy file="${checkout.telscale-smsc.dir}/core/slee/resource-adaptors/mproc-ra/du-ratype/target/mproc-ratype-du-${telscale.smsc.release.version}.jar" todir="${release.dir}/jboss-5.1.0.GA/simulator/default/deploy" failonerror="true" />
-		<copy file="${checkout.restcomm-smsc.dir}/core/slee/resource-adaptors/mproc-ra/du/target/mproc-ra-du-${restcomm.smsc.release.version}.jar" todir="${release.dir}/jboss-5.1.0.GA/server/simulator/deploy" failonerror="true" />
+		<copy file="${checkout.restcomm-smsc.dir}/core/slee/resource-adaptors/mproc-ra/du-ratype/target/mproc-ratype-du-${restcomm.smsc.release.version}.jar" todir="${release.dir}/jboss-5.1.0.GA/simulator/default/deploy" failonerror="true" />
+		<copy file="${checkout.restcomm-smsc.dir}/core/slee/resource-adaptors/mproc-ra/du-ra/target/mproc-ra-du-${restcomm.smsc.release.version}.jar" todir="${release.dir}/jboss-5.1.0.GA/server/simulator/deploy" failonerror="true" />
 		<copy file="${checkout.restcomm-smsc.dir}/core/slee/services/du/target/smsc-services-du-${restcomm.smsc.release.version}.jar" todir="${release.dir}/jboss-5.1.0.GA/server/simulator/deploy" failonerror="true" />
     	<copy file="${checkout.dir}/${restcomm-map-ra.download.jar.file}" todir="${release.dir}/jboss-5.1.0.GA/server/simulator/deploy" failonerror="true" />
 		<copy file="${checkout.restcomm-smsc.dir}/management/ui-management/target/smsc-management.war" todir="${release.dir}/jboss-5.1.0.GA/server/simulator/deploy" failonerror="true" />
